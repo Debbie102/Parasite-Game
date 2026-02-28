@@ -1,50 +1,57 @@
-[gd_scene load_steps=6 format=3 uid="uid://4foyv4c01vh0"]
+[gd_scene format=3 uid="uid://4foyv4c01vh0"]
 
+[ext_resource type="Script" uid="uid://ccbi264382ikn" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://1exfc65vxjnc" path="res://mob.tscn" id="1_x4q45"]
-[ext_resource type="Script" path="res://path_follow_2d.gd" id="2_hchdr"]
+[ext_resource type="Script" uid="uid://bqd7r7q363qsy" path="res://path_follow_2d.gd" id="2_hchdr"]
 [ext_resource type="PackedScene" uid="uid://dk5bpgq6prw4g" path="res://parasite.tscn" id="2_xa0xt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47bm5"]
-size = Vector2(502, 170.5)
+size = Vector2(923, 166)
 
-[sub_resource type="Curve2D" id="Curve2D_1yp6x"]
+[sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 314.787, 280, 0, 0, 0, 0, 403.811, 280, 0, 0, 0, 0, 469.612, 281, 0, 0, 0, 0, 528.639, 280, 0, 0, 0, 0, 607.019, 281, 0, 0, 0, 0, 662.175, 279, 0, 0, 0, 0, 701.849, 282, 0, 0, 0, 0, 727.976, 282)
+"points": PackedVector2Array(0, 0, 0, 0, 314.787, 280, 0, 0, 0, 0, 403.811, 280, 0, 0, 0, 0, 469.612, 281, 0, 0, 0, 0, 528.639, 280)
 }
-point_count = 8
+point_count = 4
 
-[node name="Game" type="Control"]
+[node name="Game" type="Control" unique_id=1670034327]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+script = ExtResource("1_fc0e3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=254427700]
 position = Vector2(517, 453)
+collision_layer = 5
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=1318311238]
 offset_left = -233.0
-offset_top = -83.0
-offset_right = 280.0
+offset_top = -80.0
+offset_right = 708.0
 offset_bottom = 104.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(23, 3.75)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2087281409]
+position = Vector2(233.5, 6)
 shape = SubResource("RectangleShape2D_47bm5")
 
-[node name="parasite" parent="." instance=ExtResource("2_xa0xt")]
+[node name="parasite" parent="." unique_id=1694173373 instance=ExtResource("2_xa0xt")]
 unique_name_in_owner = true
 position = Vector2(354, 257)
 
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2(43.6908, 84)
-scale = Vector2(1.03343, 1)
-curve = SubResource("Curve2D_1yp6x")
+[node name="Camera2D" type="Camera2D" parent="parasite" unique_id=674370583]
+unique_name_in_owner = true
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="Path2D" type="Path2D" parent="." unique_id=1832770854]
+position = Vector2(520, 106)
+scale = Vector2(1.03343, 1)
+curve = SubResource("Curve2D_feb5d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=261994897]
 position = Vector2(314.787, 280)
+loop = false
 script = ExtResource("2_hchdr")
 
-[node name="CharacterBody2D" parent="Path2D/PathFollow2D" instance=ExtResource("1_x4q45")]
+[node name="CharacterBody2D" parent="Path2D/PathFollow2D" unique_id=1326177312 instance=ExtResource("1_x4q45")]
 position = Vector2(-4.05257, -92.9601)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk5bpgq6prw4g"]
+[gd_scene format=3 uid="uid://dk5bpgq6prw4g"]
 
-[ext_resource type="Script" path="res://parasite.gd" id="1_0jhob"]
+[ext_resource type="Script" uid="uid://btl3jy1udpdbq" path="res://parasite.gd" id="1_0jhob"]
 [ext_resource type="Texture2D" uid="uid://ivpkglm45ecy" path="res://parasite.png" id="2_qumst"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ngrf3"]
@@ -60,30 +60,29 @@ height = 26.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_f147k"]
 radius = 43.0
 
-[node name="parasite" type="CharacterBody2D"]
-position = Vector2(80, 49)
+[node name="parasite" type="CharacterBody2D" unique_id=815565575]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_0jhob")
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=1648708775]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 5.0
 default_color = Color(0.776471, 0.67451, 0.913725, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=834587831]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_c3edn")
 frame = 5
 frame_progress = 0.497247
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1065935593]
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_acmnt")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1229461259]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2124972733]
 position = Vector2(-4, 1)
 shape = SubResource("CircleShape2D_f147k")
 

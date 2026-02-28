@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-
+const SPEED = 100.0
+var hit_target = false
 
 signal possession(pin: int)
 
@@ -17,7 +17,9 @@ func _input(event):
 	# Use is_action_pressed to only accept single taps as input instead of mouse drags.
 	if event.is_action_pressed(&"click") and $Line2D.points[0].distance_to($Line2D.points[1]) < 200.0:
 		print(target)
+		print(position)
 		target = get_global_mouse_position()
+		hit_target = false
 
 
 func _on_possession(is_in_body: bool, body_id: int, pos: Vector2):
@@ -33,9 +35,15 @@ func _on_possession(is_in_body: bool, body_id: int, pos: Vector2):
 		
 		
 func _physics_process(delta):
+	
 	if target != null:
-		velocity = position.direction_to(target) * SPEED
-	# look_at(target)
+		velocity = position.direction_to(target) * SPEED 
+		pass
+	#elif hit_target or target == null:
+		#if not is_on_floor():
+			#velocity += get_gravity() * delta
+		pass
+			# look_at(target)
 
 	$Line2D.points[1] = get_local_mouse_position()
 	if $Line2D.points[0].distance_to($Line2D.points[1]) > 200.0:
@@ -49,6 +57,8 @@ func _physics_process(delta):
 	else:
 		$Line2D.default_color = Color(0.776,0.675,0.914)
 		pass
+	if target != null and position.distance_to(target) < 20:
+		hit_target = true
 	
 
 

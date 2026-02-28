@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	if velocity.x == 0:
+	if velocity.x == 0 and possessed == false:
 		$AnimatedSprite2D.play("idle")
 	else:
 		if velocity.x >= 0:
