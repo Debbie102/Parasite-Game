@@ -88,7 +88,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rffyk"]
-height = 46.0
+height = 32.666668
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmx7q"]
 bg_color = Color(0, 0, 0, 1)
@@ -113,7 +113,7 @@ sprite_frames = SubResource("SpriteFrames_ilvf2")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=281995550]
-position = Vector2(0.333333, 3.33333)
+position = Vector2(-0.3333333, 9.333334)
 shape = SubResource("CapsuleShape2D_rffyk")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1113952866]
@@ -128,5 +128,7 @@ value = 100.0
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="." unique_id=586911346]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=158831694]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

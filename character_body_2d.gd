@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			velocity.x = direction * SPEED
 		else:
+			
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	if $ProgressBar.value <= 0:
 		$Timer.stop()
@@ -51,6 +52,8 @@ func on_possessed(in_body: bool, pin: int, pos: Vector2):
 			possessed = true
 			
 		$Timer.start()
+	else:
+		$Timer.stop()
 	pass
 
 

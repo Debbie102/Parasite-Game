@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://ccbi264382ikn" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://1exfc65vxjnc" path="res://mob.tscn" id="1_x4q45"]
 [ext_resource type="Script" uid="uid://bqd7r7q363qsy" path="res://path_follow_2d.gd" id="2_hchdr"]
+[ext_resource type="PackedScene" uid="uid://cethtfyjnt6cy" path="res://floor.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://dk5bpgq6prw4g" path="res://parasite.tscn" id="2_xa0xt"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_47bm5"]
-size = Vector2(923, 166)
+[ext_resource type="PackedScene" uid="uid://fl00wjfjl4ls" path="res://mana.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://cphp7ogrbyco4" path="res://mana_cluster.tscn" id="7_eow3j"]
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
@@ -14,37 +14,33 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jktm"]
+bg_color = Color(0.17641899, 0.17641914, 0.17641902, 0.4509804)
+
 [node name="Game" type="Control" unique_id=1670034327]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fc0e3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=254427700]
-position = Vector2(517, 453)
-collision_layer = 5
+[node name="StaticBody2D2" parent="." unique_id=1271983126 instance=ExtResource("2_ryrav")]
+position = Vector2(1667, 1135)
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=1318311238]
-offset_left = -233.0
-offset_top = -80.0
-offset_right = 708.0
-offset_bottom = 104.0
+[node name="StaticBody2D4" parent="." unique_id=1782042251 instance=ExtResource("2_ryrav")]
+position = Vector2(1868, -447)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2087281409]
-position = Vector2(233.5, 6)
-shape = SubResource("RectangleShape2D_47bm5")
+[node name="StaticBody2D" parent="." unique_id=448715782 instance=ExtResource("2_ryrav")]
+position = Vector2(366, 432)
 
-[node name="parasite" parent="." unique_id=1694173373 instance=ExtResource("2_xa0xt")]
-unique_name_in_owner = true
-position = Vector2(354, 257)
-
-[node name="Camera2D" type="Camera2D" parent="parasite" unique_id=674370583]
-unique_name_in_owner = true
+[node name="StaticBody2D3" parent="." unique_id=1656934652 instance=ExtResource("2_ryrav")]
+position = Vector2(2809, -448)
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1832770854]
-position = Vector2(520, 106)
+position = Vector2(462, 87)
 scale = Vector2(1.03343, 1)
 curve = SubResource("Curve2D_feb5d")
 
@@ -55,3 +51,72 @@ script = ExtResource("2_hchdr")
 
 [node name="CharacterBody2D" parent="Path2D/PathFollow2D" unique_id=1326177312 instance=ExtResource("1_x4q45")]
 position = Vector2(-4.05257, -92.9601)
+
+[node name="Area2D2" parent="." unique_id=846623992 instance=ExtResource("5_7jktm")]
+position = Vector2(539, 273)
+
+[node name="Mana" parent="." unique_id=1496857588 instance=ExtResource("5_7jktm")]
+position = Vector2(691, 273)
+
+[node name="Mana6" parent="." unique_id=1913821252 instance=ExtResource("5_7jktm")]
+position = Vector2(1945, 682)
+
+[node name="Mana7" parent="." unique_id=221849260 instance=ExtResource("5_7jktm")]
+position = Vector2(2441, 603)
+
+[node name="Mana8" parent="." unique_id=1547893260 instance=ExtResource("5_7jktm")]
+position = Vector2(3069, 338)
+
+[node name="Mana9" parent="." unique_id=218281417 instance=ExtResource("5_7jktm")]
+position = Vector2(2683, 470)
+
+[node name="Mana10" parent="." unique_id=1123213726 instance=ExtResource("5_7jktm")]
+position = Vector2(3448, 145)
+
+[node name="Mana2" parent="." unique_id=1481312729 instance=ExtResource("5_7jktm")]
+position = Vector2(1439, 732)
+
+[node name="Mana4" parent="." unique_id=1079809748 instance=ExtResource("5_7jktm")]
+position = Vector2(1273, 447)
+
+[node name="Mana5" parent="." unique_id=1423597493 instance=ExtResource("5_7jktm")]
+position = Vector2(1358, 579)
+
+[node name="Mana3" parent="." unique_id=1873587094 instance=ExtResource("5_7jktm")]
+position = Vector2(1175, 308)
+
+[node name="Area2D" parent="." unique_id=1492280780 instance=ExtResource("5_7jktm")]
+position = Vector2(807, 274)
+
+[node name="parasite" parent="." unique_id=1694173373 instance=ExtResource("2_xa0xt")]
+unique_name_in_owner = true
+position = Vector2(354, 257)
+
+[node name="Camera2D" type="Camera2D" parent="parasite" unique_id=674370583]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=968421728]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1969490149]
+offset_left = 370.0
+offset_top = 454.0
+offset_right = 564.0
+offset_bottom = 477.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_7jktm")
+text = "press f to get out of body"
+
+[node name="CharacterBody2D" parent="." unique_id=683676429 instance=ExtResource("1_x4q45")]
+position = Vector2(1594.0001, 977)
+
+[node name="CharacterBody2D2" parent="." unique_id=649126602 instance=ExtResource("1_x4q45")]
+position = Vector2(2834, -607)
+
+[node name="CharacterBody2D3" parent="." unique_id=582306291 instance=ExtResource("1_x4q45")]
+position = Vector2(1779, -607)
+
+[node name="mana_cluster" parent="." unique_id=1293212246 instance=ExtResource("7_eow3j")]
+position = Vector2(3792, -266)
+
+[node name="mana_cluster2" parent="." unique_id=477429859 instance=ExtResource("7_eow3j")]
+position = Vector2(2886, 284)

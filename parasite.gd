@@ -3,16 +3,20 @@ extends CharacterBody2D
 
 const SPEED = 100.0
 var hit_target = false
-
+var mana_count = 25
 signal possession(pin: int)
 
 var target = position
 
 func _ready() -> void:
+	$Timer.start()
 	$AnimatedSprite2D.play("default")
 	target = null
 	SignalBus.possessing.connect(_on_possession)
+	SignalBus.got_mana.connect(_on_got_mana)
 
+func _on_got_mana(amount: int):
+	mana_count += amount
 func _input(event):
 	# Use is_action_pressed to only accept single taps as input instead of mouse drags.
 	if event.is_action_pressed(&"click") and $Line2D.points[0].distance_to($Line2D.points[1]) < 200.0:
@@ -24,18 +28,23 @@ func _input(event):
 
 func _on_possession(is_in_body: bool, body_id: int, pos: Vector2):
 	if is_in_body == false:
+		$Timer.start()
 		visible = true
 		$Area2D/CollisionShape2D.set_deferred("disabled",false)
 		$CollisionShape2D.set_deferred("disabled",false)
 		position = pos
+		
 	else:
+		target = null
+		$Timer.stop()
+		mana_count = 50
 		visible = false
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 		$CollisionShape2D.set_deferred("disabled",true)
 		
 		
 func _physics_process(delta):
-	
+	$ProgressBar.value = mana_count
 	if target != null:
 		velocity = position.direction_to(target) * SPEED 
 		pass
@@ -60,6 +69,8 @@ func _physics_process(delta):
 	if target != null and position.distance_to(target) < 20:
 		hit_target = true
 	
+	if mana_count <= 0:
+		SignalBus.game_over.emit()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -69,3 +80,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		SignalBus.possessing.emit(true, body.get_instance_id(), global_position)
 		
 		
+
+
+func _on_timer_timeout() -> void:
+	mana_count -= 5 
+	pass # Replace with function body.

@@ -58,7 +58,17 @@ radius = 12.0
 height = 26.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f147k"]
-radius = 43.0
+radius = 35.014282
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1vdk"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkj8m"]
+bg_color = Color(0.10004834, 0.023354575, 0.16204861, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [node name="parasite" type="CharacterBody2D" unique_id=815565575]
 collision_layer = 2
@@ -86,4 +96,19 @@ shape = SubResource("CapsuleShape2D_acmnt")
 position = Vector2(-4, 1)
 shape = SubResource("CircleShape2D_f147k")
 
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=466783519]
+offset_left = -62.0
+offset_top = -41.0
+offset_right = 59.0
+offset_bottom = -27.0
+theme_override_font_sizes/font_size = 11
+theme_override_styles/background = SubResource("StyleBoxFlat_b1vdk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jkj8m")
+max_value = 25.0
+value = 25.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="." unique_id=487384424]
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

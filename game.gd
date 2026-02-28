@@ -1,25 +1,27 @@
 extends Control
 @onready var player = %parasite
 @onready var Camera_id 
+var in_body = false
+var current_body 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	%parasite/Camera2D.make_current()
 	SignalBus.possessing.connect(_on_body_possessed)
-	
+	SignalBus.game_over.connect(_on_game_over)
 	pass # Replace with function body.
 func _on_body_possessed(is_body : bool, body_id: int, pos: Vector2):
-	if %Camera2D != null:
-		Camera_id = %Camera2D.get_instance_id()
-	if !is_body or body_id == null:
-		if instance_from_id(Camera_id) != null and instance_from_id(Camera_id).get_parent() != null:
-			instance_from_id(Camera_id).get_parent().remove_child(instance_from_id(Camera_id))
-		player.add_child(instance_from_id(Camera_id))
-	elif is_body:
-		if get_mob_id(self,body_id) != null:
-			if instance_from_id(Camera_id) != null and instance_from_id(Camera_id).get_parent() != null:
-				instance_from_id(Camera_id).get_parent().remove_child(instance_from_id(Camera_id))
-			get_mob_id(self,body_id).add_child(instance_from_id(Camera_id))
+	if instance_from_id(body_id) != null:
+		instance_from_id(body_id).get_node_or_null("Camera2D").make_current()
+	else:
+		%parasite/Camera2D.make_current()
 	pass
+	if is_body == true:
+		in_body = true
+		$CanvasLayer/Label.visible = true
+		current_body = instance_from_id(body_id)
+	else:
+		in_body = false
+		$CanvasLayer.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,4 +33,14 @@ func get_mob_id(object,body_id):
 			return object.get_child(i)
 		else:
 			get_mob_id(object.get_child(i),body_id)
+		pass
+func _on_game_over():
+	get_tree().change_scene_to_file("res://game_over.tscn")
+	pass
+func _input(event):
+	# Use is_action_pressed to only accept single taps as input instead of mouse drags.
+	if event.is_action_pressed("leave_body") and in_body == true:
+		print(current_body)
+		print(current_body.get("global_position.x"))
+		SignalBus.possessing.emit(false,1,Vector2(current_body.global_position.x - 100,current_body.global_position.y-100))
 		pass
